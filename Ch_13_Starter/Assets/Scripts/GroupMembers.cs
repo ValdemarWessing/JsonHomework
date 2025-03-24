@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public struct GroupMembers
+public struct GroupMembers //serializable struct to store group members data
 {
     public string name;
     public string favoriteColor;

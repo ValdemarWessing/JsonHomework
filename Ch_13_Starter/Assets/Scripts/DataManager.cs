@@ -22,13 +22,13 @@ public class DataManager : MonoBehaviour, IManager
         new Weapon("Brass Knuckles", 15),
     };
     private string _jsonWeapons;
-    private String _jsonGroupMembers;
+    private String _jsonGroupMembers; // Path to GroupMembersJSON.json
     
     private List<GroupMembers> groupMembers = new List<GroupMembers> // List of GroupMembers
     {
-        new GroupMembers("John Doe", "01/01/2000", "Blue"),
-        new GroupMembers("Jane Doe", "02/02/2000", "Red"),
-        new GroupMembers("Joe Doe", "03/03/2000", "Green"),
+        new GroupMembers("Ole", "01/01/1998", "Blue"),
+        new GroupMembers("Søren", "02/02/2001", "Red"),
+        new GroupMembers("Sofie", "03/03/2000", "Green"),
     };
 
     private string _state;
@@ -46,8 +46,8 @@ public class DataManager : MonoBehaviour, IManager
         _dataPath = Application.persistentDataPath + "/Player_Data/";
         Debug.Log(_dataPath);
         
-        _GroupMembers = _dataPath + "GroupMembers_Data.xml"; // Path for GoupMembers Data
-        _jsonGroupMembers = _dataPath + "GroupMembersJSON.json";
+        _GroupMembers = _dataPath + "GroupMembers_Data.xml"; // Path for GoupMembers Data Xml
+        _jsonGroupMembers = _dataPath + "GroupMembersJSON.json"; // Path for GoupMembers Data Json
         
         _textFile = _dataPath + "Save_Data.txt";
         _streamingTextFile = _dataPath + "Streaming_Save_Data.txt";
@@ -91,7 +91,7 @@ public class DataManager : MonoBehaviour, IManager
         Debug.LogFormat("Temporary path: {0}", Path.GetTempPath());
     }
 
-    public void NewDirectory() //create a new directory
+    public void NewDirectory() //create a new directory at _dataPath location
     {
         if (Directory.Exists(_dataPath))
         {
@@ -213,7 +213,7 @@ public class DataManager : MonoBehaviour, IManager
         }
     }
 
-    public void SerializeXML() // Serialize GroupMembers Data
+    public void SerializeXML() // Serialize GroupMembers Data to XML
     {
         var xmlSerializer = new XmlSerializer(typeof(List<GroupMembers>));
 
@@ -223,7 +223,7 @@ public class DataManager : MonoBehaviour, IManager
         }
     }
 
-    public void DeserializeXML()
+    public void DeserializeXML() // Deserialize GroupMembers Data from XML
     {
         if (File.Exists(_GroupMembers))
         {
@@ -240,7 +240,7 @@ public class DataManager : MonoBehaviour, IManager
         }
     }
 
-    public void SerializeJSON()
+    public void SerializeJSON() // Serialize groupMembers Data to JSON
     {
         //WeaponShop shop = new WeaponShop();
         //shop.inventory = weaponInventory;
@@ -253,7 +253,7 @@ public class DataManager : MonoBehaviour, IManager
         
     }
 
-    public void DeserializeJSON()
+    public void DeserializeJSON() // Deserialize groupMembers Data from JSON
     {
         if (File.Exists(_jsonGroupMembers))
         {
